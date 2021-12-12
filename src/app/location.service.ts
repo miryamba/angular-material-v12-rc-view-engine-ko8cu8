@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import { interval, Observable } from 'rxjs';
+import { interval, Observable,throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import {catchError, map, tap} from 'rxjs/operators';
 @Injectable()
 export class LocationService {
-  public getIssLocations(): Observable<string> {
-    return this.http.get<string>('http://api.open-notify.org/iss-now.json');
+  constructor(private http: HttpClient) {}
+  public getIssLocations(): Observable<any> {
+    const url = `http://api.open-notify.org/iss-now.json`;
+    return this.http.get(url).pipe(map((res) => res), catchError( (error: any) => throwError(error)));;
   }
 
-  constructor(private http: HttpClient) {}
+
 }

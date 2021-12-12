@@ -1,15 +1,16 @@
-import {HttpClientModule} from '@angular/common/http';
-import {NgModule} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DemoMaterialModule} from './app/material-module';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DemoMaterialModule } from './app/material-module';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { LocationService } from './app/location.service';
 
-import {BadgeOverviewExample} from './app/badge-overview-example';
-
+//import { BadgeOverviewExample } from './app/badge-overview-example';
+import { MyNoteComponent } from './app/my-note/my-note.component';
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
 // This makes the examples that use MatFormField render the same in StackBlitz as on the docs site.
@@ -23,18 +24,22 @@ import {BadgeOverviewExample} from './app/badge-overview-example';
     MatNativeDateModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [BadgeOverviewExample],
-  declarations: [BadgeOverviewExample],
-  bootstrap: [BadgeOverviewExample],
+  entryComponents: [MyNoteComponent],
+  declarations: [MyNoteComponent],
+  bootstrap: [MyNoteComponent],
   providers: [
-    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
-  ]
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
+    LocationService,
+  ],
 })
 export class AppModule {}
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
-
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err) => console.error(err));
 
 /**  Copyright 2021 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
